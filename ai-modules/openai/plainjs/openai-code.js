@@ -61,6 +61,23 @@ function hwe(e) {
     , 0),
     0
 }
+// ---- add this before KK(...) ----
+function Gz() {
+  // Browser (Crypto API)
+  if (typeof crypto !== "undefined" && crypto.getRandomValues) {
+    const a = new Uint8Array(16);
+    crypto.getRandomValues(a);
+    return a;
+  }
+
+  // Node.js (crypto module)
+  if (typeof require === "function") {
+    const { randomBytes } = require("crypto");
+    return randomBytes(16);
+  }
+
+  throw new Error("No secure random generator available (crypto.getRandomValues / crypto.randomBytes).");
+}
 function KK(e, t, n) {
     if (oR.randomUUID && !e)
         return oR.randomUUID();
