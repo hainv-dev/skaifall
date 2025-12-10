@@ -78,6 +78,19 @@ function Gz() {
 
   throw new Error("No secure random generator available (crypto.getRandomValues / crypto.randomBytes).");
 }
+// ---- add this before KK(...) ----
+function Fz(bytes) {
+  // Convert to UUID v4 string
+  const hex = [...bytes].map(b => b.toString(16).padStart(2, "0"));
+
+  return (
+    hex[0] + hex[1] + hex[2] + hex[3] + "-" +
+    hex[4] + hex[5] + "-" +
+    hex[6] + hex[7] + "-" +
+    hex[8] + hex[9] + "-" +
+    hex.slice(10).join("")
+  );
+}
 function KK(e, t, n) {
     if (oR.randomUUID && !e)
         return oR.randomUUID();
